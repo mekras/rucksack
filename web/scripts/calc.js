@@ -78,6 +78,26 @@
     };
 
     /**
+     * Задаёт пол
+     *
+     * @param {String} gender пол
+     */
+    window.vpohod.setGender = function (gender)
+    {
+        settings.person.gender = gender;
+    };
+
+    /**
+     * Задаёт возрастную группу
+     *
+     * @param {String} age возрастная группа
+     */
+    window.vpohod.setAge = function (age)
+    {
+        settings.person.age = age;
+    };
+
+    /**
      * Производит расчёт и возвращает список нужных вещей
      *
      * @return {Array}
@@ -92,6 +112,8 @@
              */
             if (!contains(item.tour.seasons, settings.tour.season)
                 || !contains(item.tour.types, settings.tour.types)
+                || !contains(item.person.gender, settings.person.gender)
+                || !contains(item.person.age, settings.person.age)
                 || (
                     undefined !== item.condition
                     && !evaluate(item.condition, settings.tour, settings.person)

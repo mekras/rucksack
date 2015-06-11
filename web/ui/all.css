@@ -49,6 +49,7 @@ body {
     background-size: 2rem;
     display: block;
     height: 2rem;
+    margin-left: 1rem;
     width: 2rem;
 }
 
@@ -65,12 +66,20 @@ body {
 @media screen and (min-width: 360px) {
     .controls__button {
         background-position: 0 50%;
+        margin-left: 2rem;
         padding-left: 2.5rem;
         width: auto;
     }
     .controls__caption {
         display: inline;
     }
+}
+
+/**
+ * Кнопка «Человек»
+ */
+.controls__button_person {
+    background-image: url(images/person.svg);
 }
 
 /**

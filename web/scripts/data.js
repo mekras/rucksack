@@ -22,6 +22,9 @@
         this.description = data.description;
         this.limits = data.limits instanceof Object ? data.limits : {};
         this.person = data.person instanceof Object ? data.person : {};
+        if (undefined === this.person.age) {
+            this.person.age = ["взрослый", "подросток"];
+        }
         this.quantity = undefined !== data.quantity ? data.quantity : 1;
         this.title = data.title;
         this.tour = data.tour instanceof Object ? data.tour : {};

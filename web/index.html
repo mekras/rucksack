@@ -14,11 +14,71 @@
 
 <header class="controls">
 
+    <label for="person-switch" class="controls__button controls__button_person">
+        <span class="controls__caption">Человек</span>
+    </label>
+
     <label for="settings-switch" class="controls__button controls__button_settings">
         <span class="controls__caption">Свойства похода</span>
     </label>
 
 </header>
+
+<input type="checkbox" class="_hidden" id="person-switch">
+
+<div class="settings">
+
+    <div class="settings__title">Человек</div>
+
+    <div>
+        <h3>Пол</h3>
+
+        <div>
+            <label>
+                <input type="radio" name="gender" value="м" checked>
+                Мужской
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input type="radio" name="gender" value="ж">
+                Женский
+            </label>
+        </div>
+
+    </div>
+
+    <div>
+        <h3>Возрастная группа</h3>
+
+        <div>
+            <label>
+                <input type="radio" name="age" value="взрослый" checked>
+                Взрослый
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="age" value="подросток">
+                Подросток
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="age" value="ребёнок">
+                Ребёнок
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="age" value="грудной">
+                Грудной ребёнок
+            </label>
+        </div>
+    </div>
+
+</div>
 
 <input type="checkbox" class="_hidden" id="settings-switch">
 
@@ -84,6 +144,7 @@
     </div>
 
 </div>
+
 
 <main class="main">
 

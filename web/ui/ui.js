@@ -38,29 +38,22 @@ $(
             }
         });
 
-        $('input[name=type]').change(function ()
+        $('.settings').on('change', function ()
         {
-            window.vpohod.setTypes([this.value]);
             rebuildAll();
         });
-
-        $('input[name=season]').change(function ()
-        {
-            window.vpohod.setSeason(this.value);
-            rebuildAll();
-        });
-
-        $('input[name=duration]').change(function ()
-        {
-            window.vpohod.setDuration(this.value);
-            rebuildAll();
-        }).change();
 
         /**
          * Перестраивает списки
          */
         function rebuildAll()
         {
+            window.vpohod.setTypes([$('input[name=type]:checked').val()]);
+            window.vpohod.setSeason($('input[name=season]:checked').val());
+            window.vpohod.setDuration($('input[name=duration]').val());
+            window.vpohod.setGender($('input[name=gender]:checked').val());
+            window.vpohod.setAge($('input[name=age]:checked').val());
+
             var data = window.vpohod.compile();
             for (var name in lists) {
                 if (lists.hasOwnProperty(name)) {
@@ -111,5 +104,7 @@ $(
             }
             body.replaceWith(newBody);
         }
+
+        rebuildAll();
     }
 );
