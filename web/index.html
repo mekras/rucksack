@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+    <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <title>Мой рюкзак</title>
+    <link rel="stylesheet" href="ui/all.css" media="all">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/calc.js"></script>
+    <script src="ui/ui.js"></script>
+</head>
+<body>
+
+<header class="controls">
+
+    <label for="settings-switch" class="controls__button controls__button_settings"></label>
+
+</header>
+
+<input type="checkbox" class="_hidden" id="settings-switch">
+
+<div class="settings">
+
+    <div class="settings__title">Настройки похода</div>
+
+    <div>
+        <h3>Вид похода</h3>
+
+        <div>
+            <label>
+                <input type="radio" name="type" value="пеший" checked>
+                Пеший
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input type="radio" name="type" value="водный">
+                Водный
+            </label>
+        </div>
+
+    </div>
+
+    <div>
+        <h3>Время года</h3>
+
+        <div>
+            <label>
+                <input type="radio" name="season" value="весна">
+                Весна
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="season" value="лето" checked>
+                Лето
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="season" value="осень">
+                Осень
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="season" value="зима">
+                Зима
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <h3>Продолжительность</h3>
+
+        <div>
+            <label>Дней</label>
+            <input type="number" name="duration" min="1" step="1" value="7">
+        </div>
+    </div>
+
+</div>
+
+<main class="main">
+
+    <div class="journey">
+        <table id="table" class="list">
+            <template class="list__item-template">
+                <tr class="list__item">
+                    <td class="list__data list__data_check">
+                        <input type="checkbox">
+                    </td>
+                    <td class="list__data list__data_title" data-name="title"></td>
+                    <td class="list__data list__data_quantity" data-name="quantity"></td>
+                </tr>
+            </template>
+            <template class="list__section-template">
+                <tr class="list__section">
+                    <th colspan="3" class="list__head"></th>
+                </tr>
+            </template>
+            <thead class="list__header">
+            <tr class="list__row">
+                <th colspan="2" class="list__head">Предмет</th>
+                <th class="list__head">Кол-во</th>
+            </tr>
+            </thead>
+            <tbody class="list__items">
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+[
+    {
+        "title": "Рюкзак"
+    },
+    {
+        "title": "Герма в рюкзак",
+        "description": "Герметичный вкладыш в рюкзак позволяет сохранить вещи в сухости"
+    },
+    {
+        "title": "Коврик",
+        "category": "Бивак",
+        "description": "Спальный коврик, он же — пенка",
+        "condition": "ctx.duration > 1"
+    },
+    {
+        "title": "Спальник",
+        "category": "Бивак",
+        "condition": "ctx.duration > 1"
+    },
+    {
+        "title": "Палатка",
+        "category": "Бивак",
+        "condition": "ctx.duration > 1"
+    },
+    {
+        "title": "Кружка",
+        "category": "Бивак"
+    },
+    {
+        "title": "Ложка",
+        "category": "Бивак"
+    },
+    {
+        "title": "Миска",
+        "category": "Бивак"
+    },
+    {
+        "title": "Нож"
+    },
+    {
+        "title": "Зажигалка или спички"
+    },
+    {
+        "title": "Документы (паспорт)"
+    },
+    {
+        "title": "Документы на нож"
+    },
+    {
+        "title": "Фонарь"
+    },
+    {
+        "title": "Сидушка"
+    },
+    {
+        "title": "Туалетная бумага",
+        "category": "Гигиена",
+        "units": "рул.",
+        "quantity": "ctx.duration / 20"
+    },
+    {
+        "title": "Носки х/б",
+        "category": "Одежда",
+        "description": "Лёгкие хлопчато-бумажные или аналогичные им носки",
+        "units": "пар.",
+        "quantity": "ctx.duration / 2",
+        "limits": {
+            "min": 2,
+            "max": 10
+        }
+    },
+    {
+        "title": "Носки тёплые",
+        "category": "Бивак",
+        "description": "Шерстяные или аналогичные им носки",
+        "units": "пар",
+        "seasons": [
+            "весна",
+            "осень",
+            "зима"
+        ]
+    },
+    {
+        "title": "Куртка-ветровка",
+        "category": "Одежда",
+        "seasons": [
+            "весна",
+            "лето",
+            "осень"
+        ]
+    },
+    {
+        "title": "Трусы",
+        "category": "Одежда",
+        "condition": "ctx.duration > 2",
+        "quantity": "ctx.duration / 3",
+        "limits": {"max": 4}
+    },
+    {
+        "title": "Тельняшка (футболка)",
+        "category": "Одежда",
+        "condition": "ctx.duration > 2",
+        "quantity": "ctx.duration / 5"
+    },
+    {
+        "title": "Свитер или тёплая кофта",
+        "category": "Одежда"
+    },
+    {
+        "title": "Штаны",
+        "category": "Одежда"
+    },
+    {
+        "title": "Тёплые подштанники",
+        "category": "Одежда"
+    },
+    {
+        "title": "Ботинки",
+        "category": "Одежда",
+        "units": "пара"
+    },
+    {
+        "title": "Шлёпанцы",
+        "category": "Одежда",
+        "units": "пара",
+        "seasons": [
+            "весна",
+            "лето"
+        ],
+        "condition": "ctx.duration > 1"
+    },
+    {
+        "title": "Перчатки",
+        "category": "Одежда",
+        "units": "пара",
+        "seasons": [
+            "осень",
+            "зима"
+        ]
+    },
+    {
+        "title": "Тёплая шапка",
+        "category": "Одежда",
+        "seasons": [
+            "осень",
+            "зима"
+        ]
+    },
+    {
+        "title": "Зубная щётка",
+        "category": "Гигиена",
+        "condition": "ctx.duration > 1"
+    },
+    {
+        "title": "Зубная паста",
+        "category": "Гигиена",
+        "units": "тюб",
+        "condition": "ctx.duration > 1",
+        "quantity": "ctx.duration / 20"
+    },
+    {
+        "title": "Полотенце (малое)",
+        "category": "Гигиена",
+        "condition": "ctx.duration > 1"
+    },
+    {
+        "title": "Личные лекарства",
+        "category": "Личная аптечка"
+    },
+    {
+        "title": "Бинт стерильный",
+        "category": "Личная аптечка"
+    },
+    {
+        "title": "Бинт эластичный",
+        "category": "Личная аптечка"
+    },
+    {
+        "title": "Кровоостанавливающий жгут",
+        "category": "Личная аптечка"
+    },
+    {
+        "title": "Вата медицинская",
+        "category": "Личная аптечка"
+    },
+    {
+        "title": "Перекись водорода",
+        "category": "Личная аптечка"
+    },
+    {
+        "title": "Пластырь бактерицидный",
+        "category": "Личная аптечка"
+    },
+    {
+        "title": "Сплавная обувь",
+        "category": "Одежда",
+        "types": ["водный"]
+    }
+]

@@ -1,0 +1,122 @@
+html {
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/**
+ * Модификатор «Скрытый элемент»
+ */
+._hidden {
+    display: none;
+}
+
+/**
+ * Главные элементы управления
+ */
+.controls {
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    display: flex;
+    height: 3rem;
+    justify-content: flex-end;
+    left: 0;
+    overflow: hidden;
+    padding: .1rem .5rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 20;
+}
+
+/**
+ * Кнопка управления
+ */
+.controls__button {
+    background: no-repeat 50% 50%;
+    background-size: 2rem;
+    display: block;
+    height: 2rem;
+    width: 2rem;
+}
+
+/**
+ * Кнопка «Настройки похода»
+ */
+.controls__button_settings {
+    background-image: url(images/settings.svg);
+}
+
+/**
+ * Блок настроек
+ */
+.settings {
+    background: #fff;
+    bottom: 0;
+    display: none;
+    left: 0;
+    padding: 1rem;
+    position: fixed;
+    right: 0;
+    top: 3.2rem;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+/**
+ * Блок настроек (видимый)
+ */
+:checked + .settings {
+    display: block;
+}
+
+
+/**
+ * Главный блок страницы
+ */
+.main {
+    margin-top: 3.5rem;
+    padding: .5rem;
+}
+
+/**
+ * Список
+ */
+.list {
+    border: solid 1px #f8f8f8;
+    border-collapse: collapse;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.list__head {
+    background: #f8f8f8;
+}
+
+.list__item {
+    border-bottom: solid 1px #f8f8f8;
+}
+
+.list__data {
+    padding: .5em;
+}
+
+.list__item_is_checked {
+    background: #dff0d8;
+}
+
+.list__data_check {
+    width: 1em;
+}
+
+.list__data_quantity {
+    white-space: nowrap;
+    width: 1em;
+}
