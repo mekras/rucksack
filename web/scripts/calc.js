@@ -5,28 +5,76 @@
 {
     'use strict';
 
-    var ctx = {
-        'type': 'пеший',
-        'weekend': false,
-        'season': 'лето',
-        'duration': 7
+    /**
+     * Настройки
+     */
+    var settings = {
+        /* Поход */
+        'tour': {
+            // Виды похода
+            'types': ['пеший'],
+            // Время года
+            'season': 'лето',
+            // Продолжительность в днях
+            'duration': 7,
+            // Дополнительные опции
+            'options': {
+                // Категория сложности реки
+                'rdc': 0
+            }
+        },
+        /* Человек */
+        'person': {
+            // Пол
+            'gender': 'муж',
+            // Возрастная группа
+            'age': 'взрослый'
+        }
     };
 
-    window.ruksack = window.ruksack || {};
+    /**
+     * API модуля
+     */
+    window.vpohod = window.vpohod || {};
 
-    window.ruksack.setType = function (type)
+    /**
+     * Задаёт виды похода
+     *
+     * @param {Array} types пеший или водный
+     */
+    window.vpohod.setTypes = function (types)
     {
-        ctx.type = type;
+        var valid = ['пеший', 'водный'];
+        for (var type of types) {
+            if (valid.indexOf(type) === -1) {
+                throw new Error('Неподдерживаемй вид похода: ' + type);
+            }
+        }
+        settings.tour.types = types;
     };
 
-    window.ruksack.setSeason = function (season)
+    /**
+     * Задаёт время года
+     *
+     * @param {String} season весна, лето, осень или зима
+     */
+    window.vpohod.setSeason = function (season)
     {
-        ctx.season = season;
+        var valid = ['весна', 'лето', 'осень', 'зима'];
+        if (valid.indexOf(season) === -1) {
+            throw new Error('Неизвестное время года: ' + season);
+        }
+        settings.tour.season = season;
     };
 
-    window.ruksack.setDuration = function (duration)
+    /**
+     * Задаёт длительность похода
+     *
+     * @param {Number} duration количество дней
+     */
+    window.vpohod.setDuration = function (duration)
     {
-        ctx.duration = duration;
+        settings.tour.duration = Math.ceil(duration);
     };
 
     /**
@@ -34,18 +82,20 @@
      *
      * @return {Array}
      */
-    window.ruksack.compile = function ()
+    window.vpohod.compile = function ()
     {
-        var items = [];
+        var lists = {"private": [], "shared": []};
         var quantity;
-        for (var item of window.ruksack.data) {
-
+        for (var item of window.vpohod.equipment) {
             /*
              * Проверяем условия
              */
-            if (!contains(item.seasons, ctx.season)
-                || !contains(item.types, ctx.type)
-                || undefined !== item.condition && !eval(item.condition)) {
+            if (!contains(item.tour.seasons, settings.tour.season)
+                || !contains(item.tour.types, settings.tour.types)
+                || (
+                    undefined !== item.condition
+                    && !evaluate(item.condition, settings.tour, settings.person)
+                )) {
                 continue;
             }
 
@@ -54,7 +104,7 @@
              */
             quantity = undefined === item.quantity
                 ? 1
-                : eval(item.quantity);
+                : evaluate(item.quantity, settings.tour, settings.person);
             if (undefined !== item.limits) {
                 quantity = applyLimits(quantity, item.limits);
             }
@@ -62,31 +112,52 @@
             quantity = Math.ceil(quantity);
 
             if (quantity > 0) {
-                items.push({
-                    'category': undefined === item.category ? '' : item.category,
+                if (undefined === lists[item.list]) {
+                    lists[item.list] = [];
+                }
+                lists[item.list].push({
+                    'category': item.category,
                     'title': item.title,
                     'description': item.description,
                     'quantity': quantity,
-                    'units': undefined === item.units ? 'шт.' : item.units
+                    'units': item.units
                 });
             }
         }
-        return items;
+        return lists;
     };
 
+    /**
+     * Проверяет, содержит ли массив указанное значение
+     *
+     * @param {Array|undefined} haystack массив
+     * @param {String|Array}    needle   искомое значение
+     *
+     * @return {Boolean}
+     */
     function contains(haystack, needle)
     {
         if (undefined === haystack) {
             return true;
         }
-        for (var value of haystack) {
-            if (value === needle) {
-                return true;
+        if (needle instanceof Array) {
+            for (var value of needle) {
+                if (haystack.indexOf(value) > -1) {
+                    return true;
+                }
             }
+        } else {
+            return haystack.indexOf(needle) > -1;
         }
         return false;
     }
 
+    /**
+     * Применяет ограничения к количеству
+     *
+     * @param {Number} quantity количество
+     * @param {Object} limits   ограничения
+     */
     function applyLimits(quantity, limits)
     {
         if (limits.min && quantity < limits.min) {
@@ -98,6 +169,20 @@
         }
 
         return quantity;
+    }
+
+    /**
+     * Вычисляет выражение
+     *
+     * @param {String} expr
+     * @param {Object} tour
+     * @param {Object} person
+     *
+     * @return {*}
+     */
+    function evaluate(expr, tour, person)
+    {
+        return eval("'use strict'; " + expr);
     }
 
 })(document, window);

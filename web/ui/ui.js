@@ -4,9 +4,28 @@
 $(
     function ()
     {
-        var table = $('#table');
+        /*
+         * Переключение листов
+         */
+        $('.list-tabs__tab').click(function (e)
+        {
+            var tab = $(this);
+            if (!tab.hasClass('list-tabs__tab_is_active')) {
+                $('.list-tabs__tab_is_active').removeClass('list-tabs__tab_is_active');
+                $('.list_is_active').removeClass('list_is_active');
+                tab.addClass('list-tabs__tab_is_active');
+                $('#' + tab.attr('href').substr(1)).addClass('list_is_active');
+            }
+            e.preventDefault();
+        });
 
-        table.on('click', '.list__item', function ()
+
+        var lists = {
+            'private': $('#private'),
+            'shared': $('#shared')
+        };
+
+        $('.tour').on('click', '.list__item', function ()
         {
             var item = $(this);
             var checkbox = $(':checkbox', item).get(0);
@@ -21,31 +40,46 @@ $(
 
         $('input[name=type]').change(function ()
         {
-            window.ruksack.setType(this.value);
-            rebuild();
-        }).change();
+            window.vpohod.setTypes([this.value]);
+            rebuildAll();
+        });
 
         $('input[name=season]').change(function ()
         {
-            window.ruksack.setSeason(this.value);
-            rebuild();
-        }).change();
+            window.vpohod.setSeason(this.value);
+            rebuildAll();
+        });
 
         $('input[name=duration]').change(function ()
         {
-            window.ruksack.setDuration(this.value);
-            rebuild();
+            window.vpohod.setDuration(this.value);
+            rebuildAll();
         }).change();
 
         /**
          * Перестраивает списки
          */
-        function rebuild()
+        function rebuildAll()
         {
-            var trTmpl = $('.list__item-template', table).get(0).content;
-            var scTmpl = $('.list__section-template', table).get(0).content;
-            var items = window.ruksack.compile();
-            var list = {};
+            var data = window.vpohod.compile();
+            for (var name in lists) {
+                if (lists.hasOwnProperty(name)) {
+                    rebuildList(lists[name], data[name]);
+                }
+            }
+        }
+
+        /**
+         * Перестраивает список
+         *
+         * @param {jQuery} list
+         * @param {Array}  items
+         */
+        function rebuildList(list, items)
+        {
+            var trTmpl = $('.list__item-template', list).get(0).content;
+            var scTmpl = $('.list__section-template', list).get(0).content;
+            var lines = {};
             var tr, item;
             for (item of items) {
                 tr = $(document.importNode(trTmpl, true));
@@ -54,23 +88,23 @@ $(
                     .attr('title', item.description);
                 $('[data-name=quantity]', tr)
                     .text(item.quantity + ' ' + item.units);
-                if (undefined === list[item.category]) {
-                    list[item.category] = [];
+                if (undefined === lines[item.category]) {
+                    lines[item.category] = [];
                 }
-                list[item.category].push(tr);
+                lines[item.category].push(tr);
             }
-            var body = $('tbody', table);
+            var body = $('tbody', list);
             var newBody = body.clone();
             newBody.children().remove();
-            for (var category in list) {
-                if (list.hasOwnProperty(category)) {
+            for (var category in lines) {
+                if (lines.hasOwnProperty(category)) {
                     if ('' !== category) {
                         tr = $(document.importNode(scTmpl, true));
                         $('.list__head', tr)
                             .text(category)
                             .appendTo(newBody);
                     }
-                    for (item of list[category]) {
+                    for (item of lines[category]) {
                         item.appendTo(newBody);
                     }
                 }

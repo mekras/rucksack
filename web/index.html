@@ -14,7 +14,9 @@
 
 <header class="controls">
 
-    <label for="settings-switch" class="controls__button controls__button_settings"></label>
+    <label for="settings-switch" class="controls__button controls__button_settings">
+        <span class="controls__caption">Свойства похода</span>
+    </label>
 
 </header>
 
@@ -85,8 +87,14 @@
 
 <main class="main">
 
-    <div class="journey">
-        <table id="table" class="list">
+    <div class="tour">
+
+        <div class="list-tabs">
+            <a class="list-tabs__tab list-tabs__tab_is_active" href="#private">Личные вещи</a>
+            <a class="list-tabs__tab" href="#shared">Общие вещи</a>
+        </div>
+
+        <table class="list list_is_active" id="private">
             <template class="list__item-template">
                 <tr class="list__item">
                     <td class="list__data list__data_check">
@@ -110,6 +118,34 @@
             <tbody class="list__items">
             </tbody>
         </table>
+
+        <table class="list" id="shared">
+            <template class="list__item-template">
+                <tr class="list__item">
+                    <td class="list__data list__data_check">
+                        <input type="checkbox">
+                    </td>
+                    <td class="list__data list__data_title" data-name="title"></td>
+                    <td class="list__data list__data_quantity" data-name="quantity"></td>
+                    <td class="list__data list__data_responsible"></td>
+                </tr>
+            </template>
+            <template class="list__section-template">
+                <tr class="list__section">
+                    <th colspan="4" class="list__head"></th>
+                </tr>
+            </template>
+            <thead class="list__header">
+            <tr class="list__row">
+                <th colspan="2" class="list__head">Предмет</th>
+                <th class="list__head">Кол-во</th>
+                <th class="list__head">Ответственный</th>
+            </tr>
+            </thead>
+            <tbody class="list__items">
+            </tbody>
+        </table>
+
     </div>
 
 </main>
